@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/hitman1_gun.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Laser_Shoot.wav" type="Sample" id=3]
+[ext_resource path="res://Assets/error.wav" type="Sample" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 13 )
+
+[sub_resource type="SampleLibrary" id=2]
+
+samples/Laser_Shoot = { "db":0.0, "pitch":1.0, "sample":ExtResource( 3 ) }
+samples/error = { "db":0.0, "pitch":10.0, "sample":ExtResource( 4 ) }
+
+[node name="player" type="RigidBody2D"]
+
+transform/pos = Vector2( -0.397217, 0 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 2.24457, 0, 0, 1.02325, -0.134961, -1.18617 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 2
+mass = 3.06
+friction = 0.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 4
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = 5.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/rot = -90.0
+texture = ExtResource( 2 )
+offset = Vector2( 9, 0 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( -0.134961, -1.18617 )
+transform/scale = Vector2( 2.24457, 1.02325 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+__meta__ = { "_edit_lock_":true }
+
+[node name="gun" type="Area2D" parent="."]
+
+transform/pos = Vector2( -9.55221, 39.0339 )
+transform/scale = Vector2( 0.137932, 0.117923 )
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="audio" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 2 )
+config/pitch_random = 0.0
+
+
